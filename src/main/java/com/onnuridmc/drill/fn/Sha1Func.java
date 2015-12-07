@@ -15,7 +15,7 @@ import org.apache.drill.exec.expr.holders.VarCharHolder;
 import io.netty.buffer.DrillBuf;
 
 @FunctionTemplate(
-        name = "sha1",
+        name = "convert_sha1",
         scope = FunctionTemplate.FunctionScope.SIMPLE,
         nulls = FunctionTemplate.NullHandling.NULL_IF_NULL
 )
