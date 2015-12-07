@@ -8,6 +8,7 @@ import org.apache.drill.exec.expr.DrillSimpleFunc;
 import org.apache.drill.exec.expr.annotations.FunctionTemplate;
 import org.apache.drill.exec.expr.annotations.Output;
 import org.apache.drill.exec.expr.annotations.Param;
+import org.apache.drill.exec.expr.annotations.Workspace;
 import org.apache.drill.exec.expr.holders.NullableVarCharHolder;
 import org.apache.drill.exec.expr.holders.VarCharHolder;
 
@@ -29,25 +30,30 @@ public class SHA1Func implements DrillSimpleFunc  {
     @Inject
     DrillBuf buffer;
     
+    @Workspace MessageDigest md;
+    
 	public void setup() {
+		try {
+			md = MessageDigest.getInstance("SHA1");
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public void eval() {
         String stringValue = org.apache.drill.exec.expr.fn.impl.StringFunctionHelpers.toStringFromUTF8(input.start, input.end, input.buffer);
 
         String outputValue = "";
-		try {
-			MessageDigest mDigest = MessageDigest.getInstance("SHA1");
-			byte[] result = mDigest.digest(stringValue.getBytes());
-			StringBuffer sb = new StringBuffer();
-			for (int i = 0; i < result.length; i++) {
-				sb.append(Integer.toString((result[i] & 0xff) + 0x100, 16).substring(1));
-			}
-			
-			outputValue = sb.toString();
-	    } catch (NoSuchAlgorithmException e) {
-	        e.printStackTrace();
-	    }
+
+		byte[] result = md.digest(stringValue.getBytes());
+		StringBuffer sb = new StringBuffer();
+		for (int i = 0; i < result.length; i++) {
+			sb.append(Integer.toString((result[i] & 0xff) + 0x100, 16).substring(1));
+		}
+		
+		outputValue = sb.toString();
+
 		
         // put the output value in the out buffer
         out.buffer = buffer;
