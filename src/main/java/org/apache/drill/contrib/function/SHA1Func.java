@@ -35,8 +35,20 @@ public class SHA1Func implements DrillSimpleFunc  {
 	public void eval() {
         String stringValue = org.apache.drill.exec.expr.fn.impl.StringFunctionHelpers.toStringFromUTF8(input.start, input.end, input.buffer);
 
-        String outputValue = encSha1(stringValue);
-
+        String outputValue = "";
+		try {
+			MessageDigest mDigest = MessageDigest.getInstance("SHA1");
+			byte[] result = mDigest.digest(stringValue.getBytes());
+			StringBuffer sb = new StringBuffer();
+			for (int i = 0; i < result.length; i++) {
+				sb.append(Integer.toString((result[i] & 0xff) + 0x100, 16).substring(1));
+			}
+			
+			outputValue = sb.toString();
+	    } catch (NoSuchAlgorithmException e) {
+	        e.printStackTrace();
+	    }
+		
         // put the output value in the out buffer
         out.buffer = buffer;
         out.start = 0;
@@ -44,21 +56,21 @@ public class SHA1Func implements DrillSimpleFunc  {
         buffer.setBytes(0, outputValue.getBytes());
 	}
 
-	private static final String encSha1(String input) {
-		try {
-			MessageDigest mDigest = MessageDigest.getInstance("SHA1");
-			byte[] result = mDigest.digest(input.getBytes());
-			StringBuffer sb = new StringBuffer();
-			for (int i = 0; i < result.length; i++) {
-				sb.append(Integer.toString((result[i] & 0xff) + 0x100, 16).substring(1));
-			}
-			
-			return sb.toString();
-	    } catch (NoSuchAlgorithmException e) {
-	        e.printStackTrace();
-	    }
-	    return "";
-    }
+//	private static final String encSha1(String input) {
+//		try {
+//			MessageDigest mDigest = MessageDigest.getInstance("SHA1");
+//			byte[] result = mDigest.digest(input.getBytes());
+//			StringBuffer sb = new StringBuffer();
+//			for (int i = 0; i < result.length; i++) {
+//				sb.append(Integer.toString((result[i] & 0xff) + 0x100, 16).substring(1));
+//			}
+//			
+//			return sb.toString();
+//	    } catch (NoSuchAlgorithmException e) {
+//	        e.printStackTrace();
+//	    }
+//	    return "";
+//    }
 	
 //     public static void main(String args[]) {
 //    	 String stringValue = "abcde";
