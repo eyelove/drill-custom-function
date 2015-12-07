@@ -30,38 +30,32 @@ public class Sha1Func implements DrillSimpleFunc  {
     @Inject
     DrillBuf buffer;
     
-    @Override
 	public void setup() {
 		
 	}
 
-    @Override
 	public void eval() {
         String stringValue = org.apache.drill.exec.expr.fn.impl.StringFunctionHelpers.toStringFromUTF8(input.start, input.end, input.buffer);
 
-        String outputValue = encrypt(stringValue);
+        String outputValue = "";
+		try {
+			MessageDigest mDigest = MessageDigest.getInstance("SHA1");
+			byte[] result = mDigest.digest(stringValue.getBytes());
+			StringBuffer sb = new StringBuffer();
+			for (int i = 0; i < result.length; i++) {
+				sb.append(Integer.toString((result[i] & 0xff) + 0x100, 16).substring(1));
+			}
+			
+			outputValue = sb.toString();
+	    } catch (NoSuchAlgorithmException e) {
+	        e.printStackTrace();
+	    }
 
         // put the output value in the out buffer
         out.buffer = buffer;
         out.start = 0;
         out.end = outputValue.getBytes().length;
         buffer.setBytes(0, outputValue.getBytes());
-	}
-
-	private static String encrypt(String input) {
-		try {
-			MessageDigest mDigest = MessageDigest.getInstance("SHA1");
-			byte[] result = mDigest.digest(input.getBytes());
-			StringBuffer sb = new StringBuffer();
-			for (int i = 0; i < result.length; i++) {
-				sb.append(Integer.toString((result[i] & 0xff) + 0x100, 16).substring(1));
-			}
-			
-			return sb.toString();
-	    } catch (NoSuchAlgorithmException e) {
-	        e.printStackTrace();
-	    }
-	    return "";
 	}
 	
 }
