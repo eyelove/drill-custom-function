@@ -44,7 +44,7 @@ public class SHA1Func implements DrillSimpleFunc  {
         buffer.setBytes(0, outputValue.getBytes());
 	}
 
-	private static String encSha1(String input) {
+	private static final String encSha1(String input) {
 		try {
 			MessageDigest mDigest = MessageDigest.getInstance("SHA1");
 			byte[] result = mDigest.digest(input.getBytes());
