@@ -27,10 +27,12 @@ public class Sha1Func implements DrillSimpleFunc  {
     @Inject
     DrillBuf buffer;
     
+    @Override
 	public void setup() {
 		
 	}
 
+    @Override
 	public void eval() {
         String stringValue = org.apache.drill.exec.expr.fn.impl.StringFunctionHelpers.toStringFromUTF8(input.start, input.end, input.buffer);
 		
