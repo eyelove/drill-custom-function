@@ -30,13 +30,12 @@ public class SHA1Func implements DrillSimpleFunc  {
     @Inject
     DrillBuf buffer;
     
-    @Workspace MessageDigest md;
+    @Workspace java.security.MessageDigest md;
     
 	public void setup() {
 		try {
 			md = MessageDigest.getInstance("SHA1");
-		} catch (NoSuchAlgorithmException e) {
-			// TODO Auto-generated catch block
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
