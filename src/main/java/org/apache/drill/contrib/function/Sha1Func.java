@@ -1,8 +1,5 @@
 package org.apache.drill.contrib.function;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-
 import javax.inject.Inject;
 
 import org.apache.drill.exec.expr.DrillSimpleFunc;
@@ -39,7 +36,7 @@ public class Sha1Func implements DrillSimpleFunc  {
 
         String outputValue = "";
 		try {
-			MessageDigest mDigest = MessageDigest.getInstance("SHA1");
+			java.security.MessageDigest mDigest = java.security.MessageDigest.getInstance("SHA1");
 			byte[] result = mDigest.digest(stringValue.getBytes());
 			StringBuffer sb = new StringBuffer();
 			for (int i = 0; i < result.length; i++) {
@@ -47,7 +44,7 @@ public class Sha1Func implements DrillSimpleFunc  {
 			}
 			
 			outputValue = sb.toString();
-	    } catch (NoSuchAlgorithmException e) {
+	    } catch (java.security.NoSuchAlgorithmException e) {
 	        e.printStackTrace();
 	    }
 
