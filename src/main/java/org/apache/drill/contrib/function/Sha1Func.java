@@ -1,4 +1,4 @@
-package com.onnuridmc.drill.fn;
+package org.apache.drill.contrib.function;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -15,7 +15,7 @@ import org.apache.drill.exec.expr.holders.VarCharHolder;
 import io.netty.buffer.DrillBuf;
 
 @FunctionTemplate(
-        name = "convert_sha1",
+        name = "sha1",
         scope = FunctionTemplate.FunctionScope.SIMPLE,
         nulls = FunctionTemplate.NullHandling.NULL_IF_NULL
 )

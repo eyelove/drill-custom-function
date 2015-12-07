@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.onnuridmc.drill.fn</groupId>
+    <groupId>org.apache.drill.contrib.function</groupId>
     <artifactId>drill-sha1</artifactId>
     <version>0.1</version>
     <name>Drill Sha1 Function</name>
