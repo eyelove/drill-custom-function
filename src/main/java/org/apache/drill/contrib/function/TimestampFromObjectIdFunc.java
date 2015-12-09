@@ -7,7 +7,7 @@ import org.apache.drill.exec.expr.holders.IntHolder;
 import org.apache.drill.exec.expr.holders.NullableVarCharHolder;
 
 @FunctionTemplate(
-        name = "TimestampFromObjectId",
+        name = "from_oid",
         scope = FunctionTemplate.FunctionScope.SIMPLE,
         nulls = FunctionTemplate.NullHandling.NULL_IF_NULL
 )
@@ -27,6 +27,5 @@ public class TimestampFromObjectIdFunc implements DrillSimpleFunc  {
         String stringValue = org.apache.drill.exec.expr.fn.impl.StringFunctionHelpers.toStringFromUTF8(input.start, input.end, input.buffer);
 
         output.value = Integer.parseInt(stringValue.substring(0, 8), 16) * 1000;
-        
 	}
 }
