@@ -11,7 +11,7 @@ import org.apache.drill.exec.expr.holders.NullableVarCharHolder;
         scope = FunctionTemplate.FunctionScope.SIMPLE,
         nulls = FunctionTemplate.NullHandling.NULL_IF_NULL
 )
-public class TimestampFromObjectId implements DrillSimpleFunc  {
+public class TimestampFromObjectIdFunc implements DrillSimpleFunc  {
 	
 	@Param 
     NullableVarCharHolder input;
