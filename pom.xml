@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.apache.drill.contrib.function</groupId>
-    <artifactId>custom</artifactId>
+    <artifactId>drill-custom</artifactId>
     <version>0.1</version>
     <name>Drill Custom Function</name>
 
