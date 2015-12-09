@@ -5,9 +5,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.apache.drill.contrib.function</groupId>
-    <artifactId>drill-sha1</artifactId>
+    <artifactId>custom</artifactId>
     <version>0.1</version>
-    <name>Drill Sha1 Function</name>
+    <name>Drill Custom Function</name>
 
 
     <dependencies>

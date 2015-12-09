@@ -1,4 +1,4 @@
-# Sha1 Function for Apache Drill
+# Custom Function for Apache Drill
 
 This project contains a simple example for a custom function for Apache Drill.
 
@@ -24,9 +24,9 @@ Clone and compile.
 
 ```
 
-git clone https://github.com/eyelove/drill-sha1-function.git
+git clone https://github.com/eyelove/drill-custom-function.git
 
-cd drill-sha1-function
+cd drill-custom-function
 
 mvn clean package
 
@@ -42,7 +42,7 @@ tar xvf apache-drill-1.3.0.tar.gz
 Copy the jar files from your functions into the 3rdparty directory in the Drill distro
 
 ```
-cp drill-sha1-function/target/*.jar apache-drill-1.1.0/jars/3rdparty
+cp drill-custom-function/target/*.jar apache-drill-1.1.0/jars/3rdparty
 ```
 
 Now run drill and test the results
