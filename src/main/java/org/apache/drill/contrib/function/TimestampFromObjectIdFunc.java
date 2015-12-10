@@ -26,6 +26,7 @@ public class TimestampFromObjectIdFunc implements DrillSimpleFunc  {
 	public void eval() {
         String stringValue = org.apache.drill.exec.expr.fn.impl.StringFunctionHelpers.toStringFromUTF8(input.start, input.end, input.buffer);
 
-        output.value = Integer.parseInt(stringValue.substring(0, 8), 16) * 1000;
+        output.value = Integer.parseInt(stringValue.substring(0, 8), 16);
 	}
+	
 }
