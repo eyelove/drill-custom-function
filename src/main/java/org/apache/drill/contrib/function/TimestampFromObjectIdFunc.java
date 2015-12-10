@@ -2,6 +2,7 @@ package org.apache.drill.contrib.function;
 
 import org.apache.drill.exec.expr.DrillSimpleFunc;
 import org.apache.drill.exec.expr.annotations.FunctionTemplate;
+import org.apache.drill.exec.expr.annotations.Output;
 import org.apache.drill.exec.expr.annotations.Param;
 import org.apache.drill.exec.expr.holders.IntHolder;
 import org.apache.drill.exec.expr.holders.NullableVarCharHolder;
@@ -16,7 +17,7 @@ public class TimestampFromObjectIdFunc implements DrillSimpleFunc  {
 	@Param 
     NullableVarCharHolder input;
 
-	@Param
+	@Output
 	IntHolder output;
 	
 	public void setup() {
